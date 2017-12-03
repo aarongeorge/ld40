@@ -7,6 +7,7 @@ import experience, {assetLoader} from '../experience';
 import {Scene} from 'ag2d';
 import Dancer01 from '../characters/dancer-01';
 import Dancer02 from '../characters/dancer-02';
+import StepSequencer from '../modules/step-sequencer';
 
 // Class: SceneOne
 class SceneOne extends Scene {
@@ -23,6 +24,28 @@ class SceneOne extends Scene {
         // Create character
         this.character = new Dancer01();
         this.character02 = new Dancer02();
+
+        // Create Step Sequencer
+        this.stepSequencer = new StepSequencer([
+            {
+                'start': 1000,
+                'key': 37
+            },
+            {
+                'start': 2000,
+                'key': 38
+            },
+            {
+                'start': 3000,
+                'key': 39
+            },
+            {
+                'start': 4000,
+                'key': 40
+            }
+        ]);
+
+        window.stepSequencer = this.stepSequencer;
     }
 
     // Method: render
@@ -34,12 +57,19 @@ class SceneOne extends Scene {
 
         this.character.render();
         this.character02.render();
+        this.stepSequencer.render(experience.context);
     }
 
     // Method: update
     update (deltaTime) {
         this.character.update(deltaTime / 1000);
         this.character02.update(deltaTime / 1000);
+        this.stepSequencer.update();
+    }
+
+    // Method: enter
+    enter () {
+        this.stepSequencer.restart();
     }
 }
 

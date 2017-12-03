@@ -18,7 +18,7 @@ const BaseCharacter = class baseCharacter {
 
     // Method: render
     render () {
-        console.log(`Render: ${this.name}`);
+        // console.log(`Render: ${this.name}`);
 
         experience.fillStyle = '#FF00FF';
         experience.fillRect(this.x, this.y, this.hitBox.width, this.hitBox.height);
@@ -27,7 +27,7 @@ const BaseCharacter = class baseCharacter {
     // Method: update
     update (deltaTime) {
 
-        console.log(`Update: ${this.name}`);
+        // console.log(`Update: ${this.name}`);
 
         // Call `handleKeys`
         this.handleKeys();
