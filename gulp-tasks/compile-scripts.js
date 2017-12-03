@@ -34,10 +34,16 @@ module.exports = (gulp, paths) => {
                     'entries': entry.basePath + entry.filename,
                     'debug': true
                 })
+                .plugin('tsify', {target: 'es6', debug: true})
                 .transform(babelify, {
                     'presets': [
                         'env',
                         'stage-2'
+                    ],
+                    'extensions': [
+                        '.js',
+                        '.json',
+                        '.ts'
                     ]
                 })
                 .bundle()
@@ -48,7 +54,7 @@ module.exports = (gulp, paths) => {
                 .pipe(buffer())
                 .pipe(gulpif(gulp.environment !== 'prod', sourcemaps.init({'loadMaps': true})))
                 .pipe(gulpif(gulp.environment === 'prod', uglify()))
-                .pipe(gulpif(gulp.environment !== 'prod', sourcemaps.write('./')))
+                .pipe(gulpif(gulp.environment !== 'prod', sourcemaps.write()))
                 .pipe(gulp.dest(entry.outputPath));
         }));
     };

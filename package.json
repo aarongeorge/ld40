@@ -29,6 +29,9 @@
     "vinyl-transform": "^1.0.0"
   },
   "dependencies": {
-    "ag2d": "^2.4.1"
+    "ag2d": "^2.4.1",
+    "png.js": "^0.2.1",
+    "tsify": "^3.0.3",
+    "typescript": "^2.6.2"
   }
 }
