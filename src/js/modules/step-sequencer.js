@@ -12,17 +12,21 @@ import experience, {assetLoader, keyManager} from '../experience';
 
 const StepSequencer = class {
     constructor (steps) {
-        this.originalSteps = steps;
-        this.steps = [...this.originalSteps];
+        this.originalSteps = [...steps];
+        this.steps = [...steps];
         this.threshold = 50;
         this.isRunning = false;
+        this.renderingOffset = {
+            'x': 10,
+            'y': 0
+        };
         this.hitMarker = {
             'width': 4,
             'height': 10
         };
         this.bars = {
             'height': 10,
-            'width': 10,
+            'width': 4,
             'colours': {
                 'hit': '#00FF00',
                 'missed': '#FF0000',
@@ -90,6 +94,13 @@ const StepSequencer = class {
     }
 
     render () {
+        // Draw background
+        const backgroundPattern = experience.context.createPattern(assetLoader.assets.notesBackground.element, 'repeat');
+
+        experience.context.rect(0, 0, experience.size.width, assetLoader.assets.notesBackground.element.height);
+        experience.context.fillStyle = backgroundPattern;
+        experience.context.fill();
+
         for (let i = 0; i < this.steps.length; i++) {
 
             // Set correct colour for bar
@@ -130,10 +141,10 @@ const StepSequencer = class {
             }
 
             // Draw bar
-            experience.context.fillRect((experience.size.width / 2) + ((this.steps[i].start - this.progress) / this.bars.timeScale), yOffset, this.bars.width, this.bars.height);
+            experience.context.fillRect(this.renderingOffset.x + ((this.steps[i].start - this.progress) / this.bars.timeScale), yOffset + this.renderingOffset.y, this.bars.width, this.bars.height);
 
             // Draw hit marker
-            experience.context.drawImage(assetLoader.assets.hitMarker.element, (experience.size.width - assetLoader.assets.hitMarker.element.offsetWidth) / 2, 0);
+            experience.context.drawImage(assetLoader.assets.hitMarker.element, this.renderingOffset.x, this.renderingOffset.y);
         }
     }
 };
