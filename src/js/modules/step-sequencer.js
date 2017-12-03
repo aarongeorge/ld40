@@ -9,11 +9,12 @@
 
 // Dependencies
 import experience, {assetLoader, keyManager} from '../experience';
+import cloneDeep from 'lodash.clonedeep';
 
 const StepSequencer = class {
-    constructor (steps) {
-        this.originalSteps = [...steps];
-        this.steps = [...steps];
+    constructor (userSteps) {
+        this.originalSteps = cloneDeep(userSteps);
+        this.steps = cloneDeep(userSteps);
         this.threshold = 50;
         this.isRunning = false;
         this.renderingOffset = {
@@ -47,7 +48,7 @@ const StepSequencer = class {
 
     restart () {
         this.stop();
-        this.steps = [...this.originalSteps];
+        this.steps = cloneDeep(this.originalSteps);
         this.start();
     }
 

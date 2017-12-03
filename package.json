@@ -24,14 +24,15 @@
     "gulp-sourcemaps": "^2.6.1",
     "gulp-uglify": "^3.0.0",
     "merge-stream": "^1.0.1",
+    "tsify": "^3.0.3",
+    "typescript": "^2.6.2",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "vinyl-transform": "^1.0.0"
   },
   "dependencies": {
     "ag2d": "^2.4.1",
-    "png.js": "^0.2.1",
-    "tsify": "^3.0.3",
-    "typescript": "^2.6.2"
+    "lodash.clonedeep": "^4.5.0",
+    "png.js": "^0.2.1"
   }
 }
