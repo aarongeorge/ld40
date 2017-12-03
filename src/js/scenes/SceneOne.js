@@ -28,19 +28,35 @@ class SceneOne extends Scene {
         // Create Step Sequencer
         this.stepSequencer = new StepSequencer([
             {
-                'start': 1000,
+                'start': 2000,
                 'key': 37
             },
             {
-                'start': 2000,
+                'start': 3000,
                 'key': 38
             },
             {
-                'start': 3000,
+                'start': 4000,
                 'key': 39
             },
             {
-                'start': 4000,
+                'start': 5000,
+                'key': 40
+            },
+            {
+                'start': 6000,
+                'key': 37
+            },
+            {
+                'start': 7000,
+                'key': 38
+            },
+            {
+                'start': 8000,
+                'key': 39
+            },
+            {
+                'start': 9000,
                 'key': 40
             }
         ]);
@@ -58,6 +74,13 @@ class SceneOne extends Scene {
         this.character.render();
         this.character02.render();
         this.stepSequencer.render(experience.context);
+
+        experience.context.textAlign = 'start';
+        experience.context.textBaseline = 'top';
+        experience.context.fillStyle = '#00FF00';
+        experience.context.fillText(this.stepSequencer.steps.filter((currentStep) => {
+            return currentStep.missed === false;
+        }).length, 0, 0);
     }
 
     // Method: update

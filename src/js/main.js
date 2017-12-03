@@ -27,6 +27,11 @@ assetLoader.addAssets([
         'name': 'hitMarker',
         'path': '{{envPath}}/img/hit-marker.png',
         'type': 'image'
+    },
+    {
+        'name': 'notesBackground',
+        'path': '{{envPath}}/img/background-notes.png',
+        'type': 'image'
     }
 ]);
 
