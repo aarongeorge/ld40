@@ -3,12 +3,13 @@
  */
 
 // Dependencies
-import experience, {assetLoader} from '../experience';
+import experience, {assetLoader, audioManager} from '../experience';
 import {Scene} from 'ag2d';
 import Dancer01 from '../characters/dancer-01';
 import Dancer02 from '../characters/dancer-02';
 import StepSequencer from '../modules/step-sequencer';
 import * as Game from '../dirk/Game';
+import {notes} from '../modules/darude-notes';
 
 // Class: SceneOne
 class SceneOne extends Scene {
@@ -27,40 +28,7 @@ class SceneOne extends Scene {
         this.character02 = new Dancer02();
 
         // Create Step Sequencer
-        this.stepSequencer = new StepSequencer([
-            {
-                'start': 2000,
-                'key': 37
-            },
-            {
-                'start': 3000,
-                'key': 38
-            },
-            {
-                'start': 4000,
-                'key': 39
-            },
-            {
-                'start': 5000,
-                'key': 40
-            },
-            {
-                'start': 6000,
-                'key': 37
-            },
-            {
-                'start': 7000,
-                'key': 38
-            },
-            {
-                'start': 8000,
-                'key': 39
-            },
-            {
-                'start': 9000,
-                'key': 40
-            }
-        ]);
+        this.stepSequencer = new StepSequencer(notes);
 
         window.stepSequencer = this.stepSequencer;
     }
@@ -97,6 +65,7 @@ class SceneOne extends Scene {
     // Method: enter
     enter () {
         this.stepSequencer.restart();
+        audioManager.play('sandstorm');
     }
 }
 

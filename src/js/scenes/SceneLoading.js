@@ -3,7 +3,7 @@
  */
 
 // Dependencies
-import experience, {assetLoader, eventEmitter, sceneManager} from '../experience';
+import experience, {assetLoader, audioManager, eventEmitter, sceneManager} from '../experience';
 import {Scene} from 'ag2d';
 import * as Game from '../dirk/Game';
 
@@ -48,6 +48,9 @@ class SceneLoading extends Scene {
 
             // Listener for `assetLoader` loaded
             eventEmitter.addListener('assetLoader:loaded', () => {
+
+                // Add `sandstorm` to `audioManager`
+                audioManager.add(assetLoader.assets.sandstorm);
 
                 /**
                  * Scene Manager setup

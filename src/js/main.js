@@ -34,6 +34,20 @@ assetLoader.addAssets([
         'type': 'image'
     },
     {
+        'type': 'audio',
+        'name': 'sandstorm',
+        'sources': [
+            {
+                'type': 'audio/ogg',
+                'path': '{{envPath}}/audio/sandstorm.ogg'
+            },
+            {
+                'type': 'audio/mpeg',
+                'path': '{{envPath}}/audio/sandstorm.mp3'
+            }
+        ]
+    },
+    {
         'name': 'stage',
         'path': '{{envPath}}/img/stage.png',
         'type': 'image'
