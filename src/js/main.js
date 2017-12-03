@@ -32,6 +32,11 @@ assetLoader.addAssets([
         'name': 'notesBackground',
         'path': '{{envPath}}/img/background-notes.png',
         'type': 'image'
+    },
+    {
+        'name': 'stage',
+        'path': '{{envPath}}/img/stage.png',
+        'type': 'image'
     }
 ]);
 

@@ -7,7 +7,8 @@ import DancerManager, {randomAnimation} from "./DancerManager";
 import {Animation} from "ag2d";
 
 enum DancerState {
-    Dancing = 1,
+    HittingDancefloor = 1,
+    Dancing,
     MovingToStage,
     ClimbingStage,
     MovingToBandMember,
@@ -15,7 +16,7 @@ enum DancerState {
 }
 
 export default class Dancer {
-    state: DancerState = DancerState.Dancing;
+    state: DancerState = DancerState.HittingDancefloor;
     excitation: number;
     // Encapsulates direction and speed in a vector
     movementVector: Vector;
@@ -30,6 +31,9 @@ export default class Dancer {
     timeToAct: number = 5;
     timeUntilEnterStage: number;
     animation: any;
+    
+    // State dependant
+    climbingStartPosition: Point;
 
     constructor(heatmap: MovementHeatMap) {
         this.lifetime = 0;
@@ -37,6 +41,13 @@ export default class Dancer {
         this.heatmap = heatmap;
         this.size = {x:32, y:32};
         this.animation = randomAnimation();
+    }
+
+    start() {
+        this.chooseNewMovementVector();
+        this.movementVector.x *= 3;
+        this.movementVector.y *= 3;
+        this.timeTilDirectionChange /= 3;
     }
 
     chooseNewMovementVector() {
@@ -82,6 +93,9 @@ export default class Dancer {
         this.lifetime += delta;
 
         switch (this.state) {
+            case DancerState.HittingDancefloor:
+                this.updateHittingDancefloor(delta);
+                break;
             case DancerState.Dancing:
                 this.updateDancing(delta);       
                 break;
@@ -102,7 +116,14 @@ export default class Dancer {
                 break;
         }
         
-        // Move
+    }
+
+    private updateHittingDancefloor(delta: number) {
+        this.timeTilDirectionChange -= delta;
+        if (this.timeTilDirectionChange < 0) {
+            this.chooseNewMovementVector();
+            this.state = DancerState.Dancing;
+        }
         this.move(delta);
     }
 
@@ -119,21 +140,23 @@ export default class Dancer {
                 // ATTAAAACK!
                 this.state = DancerState.MovingToStage;
                 // Find the closest stage entry point
-                var closestPoint: StageEntryPoint = {
-                    entryPoint: {x: 99999, y: 99999},
-                    exitPoint: {x: 99999, y: 99999}
-                };
-                var closestDistance = Util.distanceBetweenPoints(this.position, closestPoint.entryPoint);
-                Game.stageEntryPoints.forEach(stageEntryPoint => {
-                    var distance = Util.distanceBetweenPoints(this.position, stageEntryPoint.entryPoint);
+                var closestPoint: Point = {x: 99999, y: 99999};
+                var closestDistance = Util.distanceBetweenPoints(this.position, closestPoint);
+                Game.stageEntryMap.points.forEach(stageEntryPoint => {
+                    var distance = Util.distanceBetweenPoints(this.position, stageEntryPoint);
                     if (distance < closestDistance) {
                         closestPoint = stageEntryPoint;
                         closestDistance = distance;
                     }
                 });
                 // Set the direction and time till we get there
+                this.movementVector = Util.getVectorForDirectionTime(this.position, closestPoint, 3);
+                this.timeUntilEnterStage = 3;
             }
         }
+
+        // Move
+        this.move(delta);
     }
 
     private updateMovingToStage(delta: number) {
@@ -141,11 +164,22 @@ export default class Dancer {
 
         if (this.timeUntilEnterStage < 0) {
             // Transition to stage climb
+            this.state = DancerState.ClimbingStage;
+            this.climbingStartPosition = {x: this.position.x, y: this.position.y};
+            this.movementVector = {x:0, y:-20};
         }
+
+        // Move
+        this.move(delta);
     }
     
     private updateClimbingStage(delta: number) {
-
+        if (this.climbingStartPosition.y - this.position.y >= 27) {
+            this.state = DancerState.MovingToBandMember;
+            // TODO: Pick a band member
+        }
+        // Move
+        this.move(delta);
     }
 
     private updateMovingToBandMember(delta: number) {

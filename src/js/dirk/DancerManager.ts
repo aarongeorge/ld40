@@ -71,7 +71,7 @@ export default class DancerManager {
         var dancer = new Dancer(Game.movementHeatMap);
         dancer.position.x = startXPos;
         dancer.position.y = startYPos;
-        dancer.chooseNewMovementVector();
+        dancer.start();
         this.dancers.push(dancer);
     }
 

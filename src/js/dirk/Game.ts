@@ -2,18 +2,18 @@ import MovementHeatMap from "./MovementHeatMap";
 import DancerManager from "./DancerManager";
 import Dancer from "./Dancer";
 import {StageEntryPoint} from "./Types";
+import StageEntryMap from "./StageEntryMap";
 
 // Controls all the game logic
 // Owns a DancerEmitter
 export let width: number = 256;
 export let height: number = 256;
 export let movementHeatMap: MovementHeatMap;
+export let stageEntryMap: StageEntryMap;
 export let crowdExcitementFactor: number = 1;
 export let dancerManager: DancerManager;
 // 0.1 means each player will decide to attack on average once every 10 seconds
 export let chanceOfAttack: number = 0.1;
-
-export let stageEntryPoints: StageEntryPoint[] = [];
 
 export function init(): Promise<any> {
     dancerManager = new DancerManager();
@@ -22,7 +22,8 @@ export function init(): Promise<any> {
 
 function preload(): Promise<any[]> {
     return Promise.all([
-        loadHeatmap()
+        loadHeatmap(),
+        loadEntryPoints()
     ]);
 }
 
@@ -30,6 +31,15 @@ function loadHeatmap(): Promise<null> {
     return new Promise((resolve, reject) => {
         movementHeatMap = new MovementHeatMap("/img/heatmap.png");
         movementHeatMap.addEventListener("loadingComplete", function() {
+            resolve();
+        });
+    });
+}
+
+function loadEntryPoints(): Promise<null> {
+    return new Promise((resolve, reject) => {
+        stageEntryMap = new StageEntryMap("/img/entry-points.png");
+        stageEntryMap.addEventListener("loadingComplete", function() {
             resolve();
         });
     });
