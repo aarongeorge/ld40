@@ -8,14 +8,28 @@
  */
 
 // Dependencies
-import experience, {keyManager} from '../experience';
+import experience, {assetLoader, keyManager} from '../experience';
 
 const StepSequencer = class {
     constructor (steps) {
         this.originalSteps = steps;
         this.steps = [...this.originalSteps];
-        this.threshold = 100;
+        this.threshold = 50;
         this.isRunning = false;
+        this.hitMarker = {
+            'width': 4,
+            'height': 10
+        };
+        this.bars = {
+            'height': 10,
+            'width': 10,
+            'colours': {
+                'hit': '#00FF00',
+                'missed': '#FF0000',
+                'neutral': '#FFFF00'
+            },
+            'timeScale': 5
+        };
     }
 
     start () {
@@ -75,18 +89,48 @@ const StepSequencer = class {
     render () {
         for (let i = 0; i < this.steps.length; i++) {
 
+            // Set correct colour for bar
             if (this.steps[i].missed) {
-                experience.context.fillStyle = '#FF0000';
+                experience.context.fillStyle = this.bars.colours.missed;
             }
 
             else if (typeof this.steps[i].missed === 'undefined') {
-                experience.context.fillStyle = '#FFFF00';
+                experience.context.fillStyle = this.bars.colours.neutral;
             }
 
             else {
-                experience.context.fillStyle = '#00FF00';
+                experience.context.fillStyle = this.bars.colours.hit;
             }
-            experience.context.fillRect(this.steps[i].start - this.progress + (experience.size.width / 2), 0, 32, 10);
+
+            let yOffset = 0;
+
+            switch (this.steps[i].key) {
+                case 37: {
+                    yOffset = 0;
+                    break;
+                }
+
+                case 38: {
+                    yOffset = this.bars.height;
+                    break;
+                }
+
+                case 39: {
+                    yOffset = this.bars.height * 2;
+                    break;
+                }
+
+                case 40: {
+                    yOffset = this.bars.height * 3;
+                    break;
+                }
+            }
+
+            // Draw bar
+            experience.context.fillRect((experience.size.width / 2) + ((this.steps[i].start - this.progress) / this.bars.timeScale), yOffset, this.bars.width, this.bars.height);
+
+            // Draw hit marker
+            experience.context.drawImage(assetLoader.assets.hitMarker.element, (experience.size.width - assetLoader.assets.hitMarker.element.offsetWidth) / 2, 0);
         }
     }
 };

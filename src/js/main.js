@@ -22,6 +22,11 @@ assetLoader.addAssets([
         'name': 'dancer02SpriteSheet',
         'path': '{{envPath}}/img/spritesheet-dancer-02.png',
         'type': 'image'
+    },
+    {
+        'name': 'hitMarker',
+        'path': '{{envPath}}/img/hit-marker.png',
+        'type': 'image'
     }
 ]);
 
