@@ -57,12 +57,14 @@ experience.resizeCanvas(window.innerWidth, window.innerHeight);
  */
 
 // Add keydown listener
-window.addEventListener('keydown', (e) => {
+experience.canvas.addEventListener('keydown', (e) => {
+    e.preventDefault();
     keyManager.keyDown(e);
 });
 
 // Add keyup listener
-window.addEventListener('keyup', (e) => {
+experience.canvas.addEventListener('keyup', (e) => {
+    e.preventDefault();
     keyManager.keyUp(e);
 });
 
