@@ -9,7 +9,7 @@ import Dancer01 from '../characters/dancer-01';
 import Dancer02 from '../characters/dancer-02';
 import StepSequencer from '../modules/step-sequencer';
 import * as Game from '../dirk/Game';
-import {notes} from '../modules/darude-notes';
+import {medium} from '../modules/darude-notes';
 
 // Class: SceneOne
 class SceneOne extends Scene {
@@ -28,7 +28,7 @@ class SceneOne extends Scene {
         this.character02 = new Dancer02();
 
         // Create Step Sequencer
-        this.stepSequencer = new StepSequencer(notes);
+        this.stepSequencer = new StepSequencer(medium);
 
         window.stepSequencer = this.stepSequencer;
     }
