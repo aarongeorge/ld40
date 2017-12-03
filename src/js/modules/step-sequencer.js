@@ -68,7 +68,10 @@ const StepSequencer = class {
 
                 // Check the appropriate key is down
                 if (keyManager.isDown(step.key)) {
-                    step.missed = false;
+
+                    if (keyManager.keysDown[step.key] - this.startTime >= step.start - this.threshold) {
+                        step.missed = false;
+                    }
                 }
             });
         }

@@ -29,6 +29,6 @@
     "vinyl-transform": "^1.0.0"
   },
   "dependencies": {
-    "ag2d": "^2.4.0"
+    "ag2d": "^2.4.1"
   }
 }
