@@ -5,6 +5,7 @@
 // Dependencies
 import experience, {assetLoader, eventEmitter, sceneManager} from '../experience';
 import {Scene} from 'ag2d';
+import * as Game from '../dirk/Game';
 
 // Scenes
 import SceneStart from './SceneStart';
@@ -58,8 +59,10 @@ class SceneLoading extends Scene {
                 // Add `SceneOne` to `sceneManager`
                 sceneManager.add(new SceneOne());
 
-                // Go to `SceneStart`
-                sceneManager.goTo('SceneStart');
+                Game.init().then(() => {
+                    // Go to `SceneStart`
+                    sceneManager.goTo('SceneStart');
+                });
             }, 1);
 
             // Call `loadAssets`

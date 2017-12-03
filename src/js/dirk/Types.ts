@@ -37,3 +37,8 @@ export class EventEmitter {
         })
     }
 }
+
+export interface StageEntryPoint {
+    entryPoint: Point,
+    exitPoint: Point
+}

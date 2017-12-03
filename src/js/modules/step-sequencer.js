@@ -32,7 +32,7 @@ const StepSequencer = class {
                 'missed': '#FF0000',
                 'neutral': '#FFFF00'
             },
-            'timeScale': 5
+            'timeScale': 20
         };
     }
 

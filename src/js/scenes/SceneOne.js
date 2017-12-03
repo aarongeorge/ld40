@@ -8,6 +8,7 @@ import {Scene} from 'ag2d';
 import Dancer01 from '../characters/dancer-01';
 import Dancer02 from '../characters/dancer-02';
 import StepSequencer from '../modules/step-sequencer';
+import * as Game from '../dirk/Game';
 
 // Class: SceneOne
 class SceneOne extends Scene {
@@ -81,6 +82,7 @@ class SceneOne extends Scene {
         experience.context.fillText(this.stepSequencer.steps.filter((currentStep) => {
             return currentStep.missed === false;
         }).length, 0, 0);
+        Game.dancerManager.render();
     }
 
     // Method: update
@@ -88,6 +90,7 @@ class SceneOne extends Scene {
         this.character.update(deltaTime / 1000);
         this.character02.update(deltaTime / 1000);
         this.stepSequencer.update();
+        Game.update(deltaTime / 1000);
     }
 
     // Method: enter

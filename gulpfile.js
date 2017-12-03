@@ -123,7 +123,7 @@ gulp.task('watch', () => {
 
     // JS
     gulp.watch(
-        [`${paths.src.scripts}**/*.js`],
+        [`${paths.src.scripts}**/*.js`, `${paths.src.scripts}**/*.ts`],
         gulp.series('compile-scripts', 'replace-environment-variables', (cb) => {
             browserSync.reload();
             cb();
