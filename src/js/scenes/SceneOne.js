@@ -41,7 +41,7 @@ class SceneOne extends Scene {
         // experience.context.fillStyle = '#F2F2F2';
         // experience.context.fillRect(0, 0, experience.size.width, experience.size.height);
 
-        // this.character.render();
+        this.character.render();
         // this.character02.render();
         this.stepSequencer.render(experience.context);
 

@@ -24,6 +24,11 @@ assetLoader.addAssets([
         'type': 'image'
     },
     {
+        'name': 'guitar',
+        'path': '{{envPath}}/img/spritesheet-bang-guitarist.png',
+        'type': 'image'
+    },
+    {
         'name': 'hitMarker',
         'path': '{{envPath}}/img/hit-marker.png',
         'type': 'image'
