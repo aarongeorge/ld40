@@ -3,7 +3,7 @@ import experience, {assetLoader} from "../experience";
 import {Animation, SpriteSheet} from "ag2d";
 import { Point } from "./Types";
 
-interface BandMember {
+export interface BandMember {
     name: string;
     animation: any;
     position: Point;
@@ -122,5 +122,9 @@ export default class BandManager {
         this.bandMembers.forEach(member => {
             member.animation.render(experience.context, member.position.x, member.position.y, 32, 32, 32, 32);
         });
+    }
+
+    getRandomBandMember(): BandMember {
+        return this.bandMembers[Math.random() * this.bandMembers.length << 0];
     }
 }

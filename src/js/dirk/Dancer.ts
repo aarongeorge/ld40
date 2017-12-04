@@ -5,6 +5,7 @@ import * as Game from "./Game";
 import * as Util from "./Util";
 import DancerManager, {randomAnimation} from "./DancerManager";
 import {Animation} from "ag2d";
+import { BandMember } from "./BandManager";
 
 enum DancerState {
     HittingDancefloor = 1,
@@ -31,6 +32,8 @@ export default class Dancer {
     timeToAct: number = 5;
     timeUntilEnterStage: number;
     animation: any;
+    bandMemberToAttack: BandMember;
+    timeTilAttack: number;
     
     // State dependant
     climbingStartPosition: Point;
@@ -174,14 +177,26 @@ export default class Dancer {
     private updateClimbingStage(delta: number) {
         if (this.climbingStartPosition.y - this.position.y >= 27) {
             this.state = DancerState.MovingToBandMember;
-            // TODO: Pick a band member
+            // Pick a band member
+            this.bandMemberToAttack = Game.bandManager.getRandomBandMember();
+            // Set the direction
+            this.movementVector = Util.getVectorForDirectionTime(this.position, this.bandMemberToAttack.position, 3);
+            this.timeTilAttack = 3;
         }
         // Move
         this.move(delta);
     }
 
     private updateMovingToBandMember(delta: number) {
-
+        this.timeTilAttack -= delta;
+        if (this.timeTilAttack < 0) {
+            // Start attacking
+            this.state = DancerState.AttackingBandMember;
+            if (this.position.y <= this.bandMemberToAttack.position.y) {
+                this.position.y = this.bandMemberToAttack.position.y + 1;
+            }
+        }
+        this.move(delta);
     }
 
     private updateAttackingBandMember(delta: number) {
