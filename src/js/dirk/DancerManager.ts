@@ -114,7 +114,9 @@ export default class DancerManager {
         this.checkForAttackers();
 
         this.dancers.forEach(dancer => {
-            dancer.update(delta);
+            if (!dancer.isAttacking()) {
+                dancer.update(delta);
+            }
         });
     }
 
@@ -122,10 +124,14 @@ export default class DancerManager {
         this.dancers.sort((a: Dancer, b: Dancer) => a.position.y - b.position.y);
 
         this.dancers.forEach(dancer => {
-            // Get frame
-            // Put frame in context
-
-            dancer.animation.render(experience.context, dancer.position.x, dancer.position.y, 32, 32, 32, 32);
+            if (dancer.isAttacking()) {
+                let randX = (Math.random()*2 << 0) - 1;
+                let randY = (Math.random()*2 << 0) - 1;
+                dancer.animation.render(experience.context, dancer.position.x+randX, dancer.position.y+randY, 32, 32, 32, 32);   
+            }
+            else {
+                dancer.animation.render(experience.context, dancer.position.x, dancer.position.y, 32, 32, 32, 32);
+            }
         });
     }
 }

@@ -34,6 +34,7 @@ export default class Dancer {
     animation: any;
     bandMemberToAttack: BandMember;
     timeTilAttack: number;
+    timeTilDead: number;
     
     // State dependant
     climbingStartPosition: Point;
@@ -204,7 +205,12 @@ export default class Dancer {
     }
 
     kill() {
-        // Remove any timers
+        // Fling them away
+        var direction = Math.random() * 2 * Math.PI;
+        var x = Math.sin(direction) * (256 + 32);
+        var y = Math.cos(direction) * (256 + 32);
+        this.movementVector = Util.getVectorForDirectionTime(this.position, {x, y}, 1);
+        this.timeTilDead = 1;
     }
 
     isAttacking(): boolean {
