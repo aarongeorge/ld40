@@ -123,17 +123,17 @@ export default class DancerManager {
     }
 
     private killAttackers() {
-        if (keyManager.isDown(83) && this.attackingW) {
+        if (keyManager.isDown(87) && this.attackingW) {
             // Kill the first dancer that's attacking w
             this.killFirst("drummer");
         }
         if (keyManager.isDown(65) && this.attackingA) {
             this.killFirst("singer");
         }
-        if (keyManager.isDown(68) && this.attackingS) {
+        if (keyManager.isDown(83) && this.attackingS) {
             this.killFirst("guitarMan");
         }
-        if (keyManager.isDown(87) && this.attackingD) {
+        if (keyManager.isDown(68) && this.attackingD) {
             this.killFirst("bass");
         }
     }
