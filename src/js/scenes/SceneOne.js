@@ -57,7 +57,7 @@ class SceneOne extends Scene {
         this.stepSequencer = new StepSequencer(difficulties.easy);
 
         Game.setSceneOne(this);
-        
+
         this.keys = {
             'w': new W(),
             'a': new A(),
@@ -69,13 +69,6 @@ class SceneOne extends Scene {
     // Method: render
     render () {
         experience.context.drawImage(assetLoader.assets.stage.element, 0, 0, assetLoader.assets.stage.element.width, assetLoader.assets.stage.element.height);
-
-        // Black background
-        // experience.context.fillStyle = '#F2F2F2';
-        // experience.context.fillRect(0, 0, experience.size.width, experience.size.height);
-
-        // this.character.render();
-        // this.character02.render();
         this.stepSequencer.render(experience.context);
 
         experience.context.drawImage(assetLoader.assets.undies.element, 10, 48);

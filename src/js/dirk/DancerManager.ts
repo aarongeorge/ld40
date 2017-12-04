@@ -124,7 +124,6 @@ export default class DancerManager {
 
     private killAttackers() {
         if (keyManager.isDown(87) && this.attackingW) {
-            // Kill the first dancer that's attacking w
             this.killFirst("drummer");
         }
         if (keyManager.isDown(65) && this.attackingA) {
