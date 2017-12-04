@@ -9,7 +9,7 @@ import Dancer01 from '../characters/dancer-01';
 import Dancer02 from '../characters/dancer-02';
 import StepSequencer from '../modules/step-sequencer';
 import * as Game from '../dirk/Game';
-import {medium} from '../modules/darude-notes';
+import * as difficulties from '../modules/darude-notes';
 import W from '../keys/w';
 import A from '../keys/a';
 import S from '../keys/s';
@@ -30,9 +30,31 @@ class SceneOne extends Scene {
         // Create character
         this.character = new Dancer01();
         this.character02 = new Dancer02();
+        var difficulty;
+
+        var queryStr = document.location.search;
+        var searchParams = new URLSearchParams(queryStr);
+        if (searchParams.has("difficulty")) {
+            switch (searchParams.get("difficulty")) {
+                case "easy":
+                difficulty = difficulties.easy;
+                    break;
+                case "medium":
+                difficulty = difficulties.medium;
+                    break;
+                case "hard":
+                difficulty = difficulties.hard;
+                    break;
+                case "expert":
+                difficulty = difficulties.expert;
+                    break;
+            }
+        } else {
+            difficulty = difficulties.easy;
+        }
 
         // Create Step Sequencer
-        this.stepSequencer = new StepSequencer(medium);
+        this.stepSequencer = new StepSequencer(difficulties.easy);
 
         Game.setSceneOne(this);
         
