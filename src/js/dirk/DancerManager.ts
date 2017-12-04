@@ -1,6 +1,6 @@
 import Dancer from "./Dancer";
 import * as Game from "./Game";
-import experience, {assetLoader} from "../experience";
+import experience, {assetLoader, keyManager} from "../experience";
 import {Animation, SpriteSheet} from "ag2d";
 
 export function randomAnimation() {
@@ -58,6 +58,10 @@ export default class DancerManager {
     dancers: Dancer[];
     // Avg 1 every emitRate seconds
     emitRate: number;
+    attackingW: boolean = false;
+    attackingA: boolean = false;
+    attackingS: boolean = false;
+    attackingD: boolean = false;
     
     constructor() {
         this.dancers = [];
@@ -80,24 +84,58 @@ export default class DancerManager {
         Game.sceneOne.keys.a.visible = false;
         Game.sceneOne.keys.s.visible = false;
         Game.sceneOne.keys.d.visible = false;
+        this.attackingW = false;
+        this.attackingA = false;
+        this.attackingS = false;
+        this.attackingD = false;
         this.dancers.forEach(dancer => {
             if (dancer.isAttacking()) {
                 switch (dancer.bandMemberToAttack.name) {
                     case "guitarMan":
                         Game.sceneOne.keys.s.visible = true;
+                        this.attackingS = true;
                         break;
                     case "singer": 
                         Game.sceneOne.keys.a.visible = true;
+                        this.attackingA = true;
                         break;
                     case "bass":
                         Game.sceneOne.keys.d.visible = true;
+                        this.attackingD = true;
                         break;
                     case "drummer":
                         Game.sceneOne.keys.w.visible = true;
+                        this.attackingW = true;
                         break;
                 }
             }
         });
+    }
+
+    private killFirst(name: string) {
+        for (var i = 0; i < this.dancers.length; i++) {
+            var dancer = this.dancers[i];
+            if (dancer.bandMemberToAttack.name == name && dancer.isAttacking()) {
+                dancer.kill();
+                break;
+            }
+        }
+    }
+
+    private killAttackers() {
+        if (keyManager.isDown(83) && this.attackingW) {
+            // Kill the first dancer that's attacking w
+            this.killFirst("drummer");
+        }
+        if (keyManager.isDown(65) && this.attackingA) {
+            this.killFirst("singer");
+        }
+        if (keyManager.isDown(68) && this.attackingS) {
+            this.killFirst("guitarMan");
+        }
+        if (keyManager.isDown(87) && this.attackingD) {
+            this.killFirst("bass");
+        }
     }
 
     increaseEmitRate() {
@@ -112,6 +150,7 @@ export default class DancerManager {
         }
 
         this.checkForAttackers();
+        this.killAttackers();
 
         this.dancers.forEach(dancer => {
             if (!dancer.isAttacking()) {

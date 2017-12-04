@@ -13,7 +13,9 @@ enum DancerState {
     MovingToStage,
     ClimbingStage,
     MovingToBandMember,
-    AttackingBandMember
+    AttackingBandMember,
+    FlingingAway,
+    Dead
 }
 
 export default class Dancer {
@@ -90,6 +92,7 @@ export default class Dancer {
     }
 
     update(delta: number) {
+        if (this.state == DancerState.Dead) return;
         this.animation.update(delta * 1000);
         // Increase the lifetime counter
         this.lifetime += delta;
@@ -115,6 +118,10 @@ export default class Dancer {
 
             case DancerState.AttackingBandMember:
                 this.updateAttackingBandMember(delta);
+                break;
+
+            case DancerState.FlingingAway:
+                this.updateFlingingAway(delta);
                 break;
         }
         
@@ -204,6 +211,15 @@ export default class Dancer {
 
     }
 
+    private updateFlingingAway(delta: number) {
+        this.timeTilDead -= delta;
+        if (this.timeTilDead < 0) {
+            this.state = DancerState.Dead;
+            // this.animation = null;
+        }
+        this.move(delta);
+    }
+
     kill() {
         // Fling them away
         var direction = Math.random() * 2 * Math.PI;
@@ -211,6 +227,7 @@ export default class Dancer {
         var y = Math.cos(direction) * (256 + 32);
         this.movementVector = Util.getVectorForDirectionTime(this.position, {x, y}, 1);
         this.timeTilDead = 1;
+        this.state = DancerState.FlingingAway;
     }
 
     isAttacking(): boolean {
