@@ -53,7 +53,7 @@ class SceneOne extends Scene {
             return currentStep.missed === false;
         }).length, 60, 48);
 
-        Game.dancerManager.render();
+        Game.render();
     }
 
     // Method: update

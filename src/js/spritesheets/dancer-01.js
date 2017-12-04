@@ -13,7 +13,7 @@ export default class Dancer01 extends SpriteSheet {
             'columns': 2,
             'frameHeight': 32,
             'frameWidth': 32,
-            'image': assetLoader.assets.guitar.element,
+            'image': assetLoader.assets.guitarMan.element,
             'name': 'dancer01',
             'rows': 1
         });

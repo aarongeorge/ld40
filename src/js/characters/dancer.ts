@@ -51,8 +51,6 @@ export class Dancer {
         div.style.top = newTarget.y + "px";
         div.style.backgroundColor = "#00ff00";
         document.body.appendChild(div);
-        
-        console.log(newTarget);
 
         // this.position = {
         //     x:0,

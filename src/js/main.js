@@ -24,8 +24,23 @@ assetLoader.addAssets([
         'type': 'image'
     },
     {
-        'name': 'guitar',
-        'path': '{{envPath}}/img/spritesheet-bang-guitarist.png',
+        'name': 'guitarMan',
+        'path': '{{envPath}}/img/spritesheet-band-guitarman.png',
+        'type': 'image'
+    },
+    {
+        'name': 'bass',
+        'path': '{{envPath}}/img/spritesheet-band-guitarist.png',
+        'type': 'image'
+    },
+    {
+        'name': 'singer',
+        'path': '{{envPath}}/img/spritesheet-band-singer.png',
+        'type': 'image'
+    },
+    {
+        'name': 'drummer',
+        'path': '{{envPath}}/img/spritesheet-band-drummer.png',
         'type': 'image'
     },
     {
