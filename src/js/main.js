@@ -39,6 +39,11 @@ assetLoader.addAssets([
         'type': 'image'
     },
     {
+        'name': 'undies',
+        'path': '{{envPath}}/img/undies.png',
+        'type': 'image'
+    },
+    {
         'type': 'audio',
         'name': 'sandstorm',
         'sources': [
@@ -85,6 +90,7 @@ experience.configure({
 
 experience.debug = false;
 experience.resizeCanvas(window.innerWidth, window.innerHeight);
+experience.context.font = '15px pixelmix';
 
 /**
  * Bind event listeners

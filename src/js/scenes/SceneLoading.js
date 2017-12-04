@@ -31,13 +31,12 @@ class SceneLoading extends Scene {
         // Scene name
         experience.context.textAlign = 'center';
         experience.context.textBaseline = 'middle';
-        experience.context.font = '10px sans-serif';
         experience.context.strokeStyle = 'black';
         experience.context.lineWidth = 1;
         experience.context.lineJoin = 'round';
-        experience.context.strokeText('Please wait, we are loading...', experience.size.width / 2, experience.size.height / 2);
+        experience.context.strokeText('Loading...', experience.size.width / 2, experience.size.height / 2);
         experience.context.fillStyle = 'white';
-        experience.context.fillText('Please wait, we are loading...', experience.size.width / 2, experience.size.height / 2);
+        experience.context.fillText('Loading...', experience.size.width / 2, experience.size.height / 2);
     }
 
     // Method: enter

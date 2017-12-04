@@ -4,6 +4,9 @@
   "description": "A frontend boilerplate using Gulp as the task runner.",
   "author": "Aaron George <aaron.dean.george@gmail.com>",
   "license": "ISC",
+  "scripts": {
+    "start": "./node_modules/.bin/gulp"
+  },
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-preset-env": "^1.6.1",

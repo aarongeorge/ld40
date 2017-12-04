@@ -6,4 +6,12 @@
     canvas {
         image-rendering: pixelated;
     }
+
+    #font-loader {
+        position: absolute;
+        transform: translateX(-100%) translateY(-100%);
+        .pixelmix {
+            font-family: pixelmix;
+        }
+    }
 }
