@@ -75,6 +75,31 @@ export default class DancerManager {
         this.dancers.push(dancer);
     }
 
+    private checkForAttackers() {
+        Game.sceneOne.keys.w.visible = false;
+        Game.sceneOne.keys.a.visible = false;
+        Game.sceneOne.keys.s.visible = false;
+        Game.sceneOne.keys.d.visible = false;
+        this.dancers.forEach(dancer => {
+            if (dancer.isAttacking()) {
+                switch (dancer.bandMemberToAttack.name) {
+                    case "guitarMan":
+                        Game.sceneOne.keys.s.visible = true;
+                        break;
+                    case "singer": 
+                        Game.sceneOne.keys.a.visible = true;
+                        break;
+                    case "bass":
+                        Game.sceneOne.keys.d.visible = true;
+                        break;
+                    case "drummer":
+                        Game.sceneOne.keys.w.visible = true;
+                        break;
+                }
+            }
+        });
+    }
+
     increaseEmitRate() {
         this.emitRate += 5;
     }
@@ -85,6 +110,8 @@ export default class DancerManager {
         if (dieRoll < emitChance) {
             this.emit();
         }
+
+        this.checkForAttackers();
 
         this.dancers.forEach(dancer => {
             dancer.update(delta);

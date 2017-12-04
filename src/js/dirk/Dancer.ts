@@ -206,4 +206,8 @@ export default class Dancer {
     kill() {
         // Remove any timers
     }
+
+    isAttacking(): boolean {
+        return this.state == DancerState.AttackingBandMember;
+    }
 }

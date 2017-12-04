@@ -5,6 +5,7 @@ import {StageEntryPoint} from "./Types";
 import StageEntryMap from "./StageEntryMap";
 import BandPlacementMap from "./BandPlacementMap";
 import BandManager from "./BandManager";
+import { sceneManager } from "../experience";
 
 // Controls all the game logic
 // Owns a DancerEmitter
@@ -18,6 +19,7 @@ export let crowdExcitementFactor: number = 1;
 export let dancerManager: DancerManager;
 // 0.1 means each player will decide to attack on average once every 10 seconds
 export let chanceOfAttack: number = 0.1;
+export let sceneOne: any;
 
 export function init(): Promise<any> {
     dancerManager = new DancerManager();
@@ -82,4 +84,8 @@ export function start() {
         update(newDate-lastTime);
         lastTime = newDate;
     }, 16.666666667);
+}
+
+export function setSceneOne(s) {
+    sceneOne = s;
 }

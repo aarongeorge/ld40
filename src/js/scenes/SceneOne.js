@@ -34,6 +34,8 @@ class SceneOne extends Scene {
         // Create Step Sequencer
         this.stepSequencer = new StepSequencer(medium);
 
+        Game.setSceneOne(this);
+        
         this.keys = {
             'w': new W(),
             'a': new A(),

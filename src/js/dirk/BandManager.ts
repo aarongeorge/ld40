@@ -44,7 +44,9 @@ export default class BandManager {
                     'fps': 4,
                     'frames': [
                         0,
-                        1
+                        1,
+                        2,
+                        3
                     ],
                     'loop': true,
                     'loopType': 'normal',
