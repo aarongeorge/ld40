@@ -5,11 +5,13 @@
 .page-homepage {
     canvas {
         image-rendering: pixelated;
+        margin: 0 auto;
     }
 
     #font-loader {
         position: absolute;
         transform: translateX(-100%) translateY(-100%);
+
         .pixelmix {
             font-family: pixelmix;
         }
