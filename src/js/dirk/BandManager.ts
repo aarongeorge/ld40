@@ -23,7 +23,6 @@ export default class BandManager {
                         0,
                         1
                     ],
-                    'animate': true,
                     'loop': true,
                     'loopType': 'normal',
                     'name': 'guitarMan',
@@ -47,7 +46,6 @@ export default class BandManager {
                         0,
                         1
                     ],
-                    'animate': true,
                     'loop': true,
                     'loopType': 'normal',
                     'name': 'singer',
@@ -71,7 +69,6 @@ export default class BandManager {
                         0,
                         1
                     ],
-                    'animate': true,
                     'loop': true,
                     'loopType': 'normal',
                     'name': 'bass',
@@ -95,7 +92,6 @@ export default class BandManager {
                         0,
                         1
                     ],
-                    'animate': true,
                     'loop': true,
                     'loopType': 'normal',
                     'name': 'drummer',
@@ -118,7 +114,7 @@ export default class BandManager {
 
     update(delta: number) {
         this.bandMembers.forEach(member => {
-            member.animation.update(delta);
+            member.animation.update(delta * 1000);
         });
     }
 
