@@ -8,3 +8,15 @@
 
 // Pages
 @import 'pages/homepage';
+
+// Pixel font
+@font-face {
+    font-family: pixelmix;
+    src: url('{{envPath}}/fonts/pixelmix/pixelmix.eot');
+    src: url('{{envPath}}/fonts/pixelmix/pixelmix.eot?iefix') format('embedded-opentype'),
+         url('{{envPath}}/fonts/pixelmix/pixelmix.woff') format('woff'),
+         url('{{envPath}}/fonts/pixelmix/pixelmix.svg') format('svg'),
+         url('{{envPath}}/fonts/pixelmix/pixelmix.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}

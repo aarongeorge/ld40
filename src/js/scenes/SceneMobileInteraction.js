@@ -26,7 +26,6 @@ class SceneMobileInteraction extends Scene {
         // Scene name
         experience.context.textAlign = 'center';
         experience.context.textBaseline = 'middle';
-        experience.context.font = '10px sans-serif';
         experience.context.strokeStyle = 'black';
         experience.context.lineWidth = 1;
         experience.context.lineJoin = 'round';

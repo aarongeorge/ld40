@@ -35,7 +35,7 @@ class SceneOne extends Scene {
 
     // Method: render
     render () {
-        experience.context.drawImage(assetLoader.assets.stage.element, 0, 0, assetLoader.assets.stage.element.width, assetLoader.assets.stage.element.height); 
+        experience.context.drawImage(assetLoader.assets.stage.element, 0, 0, assetLoader.assets.stage.element.width, assetLoader.assets.stage.element.height);
 
         // Black background
         // experience.context.fillStyle = '#F2F2F2';
@@ -45,12 +45,14 @@ class SceneOne extends Scene {
         // this.character02.render();
         this.stepSequencer.render(experience.context);
 
+        experience.context.drawImage(assetLoader.assets.undies.element, 10, 48);
+        experience.context.fillStyle = '#FFFFFF';
         experience.context.textAlign = 'start';
         experience.context.textBaseline = 'top';
-        experience.context.fillStyle = '#00FF00';
         experience.context.fillText(this.stepSequencer.steps.filter((currentStep) => {
             return currentStep.missed === false;
-        }).length, 0, 0);
+        }).length, 60, 48);
+
         Game.dancerManager.render();
     }
 
