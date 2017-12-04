@@ -4,8 +4,13 @@
 
 .page-menu {
     #menu {
-        margin: 0 auto;
         height: 256px;
+        image-rendering: pixelated;
+        margin: 0 auto;
         width: 256px;
+
+        #scale-wrapper {
+            transform-origin: top center;
+        }
     }
 }

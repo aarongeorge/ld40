@@ -13,18 +13,27 @@
     </head>
     <body class="page-menu">
         <div id="menu">
-            <img src="{{envPath}}/img/background-menu.png" usemap="#image-map">
-            <map name="image-map">
-                <area href="{{envPath}}/game.html?difficulty=easy" coords="148,138,149,169,233,170,234,134" shape="poly">
-                <area href="{{envPath}}/game.html?difficulty=hard" coords="134,173,253,173,255,205,135,195" shape="poly">
-                <area href="{{envPath}}/game.html?difficulty=hard" coords="151,198,150,222,239,225,250,204" shape="poly">
-                <area href="{{envPath}}/game.html?difficulty=expert" coords="125,224,249,226,247,255,128,255" shape="poly">
-            </map>
+            <div id="scale-wrapper">
+                <img src="{{envPath}}/img/background-menu.png" usemap="#image-map">
+                <map name="image-map">
+                    <area href="{{envPath}}/game.html?difficulty=easy" coords="148,138,149,169,233,170,234,134" shape="poly">
+                    <area href="{{envPath}}/game.html?difficulty=hard" coords="134,173,253,173,255,205,135,195" shape="poly">
+                    <area href="{{envPath}}/game.html?difficulty=hard" coords="151,198,150,222,239,225,250,204" shape="poly">
+                    <area href="{{envPath}}/game.html?difficulty=expert" coords="125,224,249,226,247,255,128,255" shape="poly">
+                </map>
+            </div>
         </div>
 
         <script>
             const areas = document.querySelectorAll('map area');
             const menuImage = document.querySelector('img');
+            const scaleWrapper = document.querySelector('#scale-wrapper');
+
+            const scaleScaleWrapper = () => {
+                scaleWrapper.style.transform = `scale(${Math.min(window.innerWidth, window.innerHeight) / 256})`;
+            };
+
+            scaleScaleWrapper();
 
             areas[0].addEventListener('mouseover', () => {
                 menuImage.src = '{{envPath}}/img/background-menu-easy.png';
@@ -41,6 +50,8 @@
             areas[3].addEventListener('mouseover', () => {
                 menuImage.src = '{{envPath}}/img/background-menu-expert.png';
             });
+
+            window.addEventListener('resize', scaleScaleWrapper);
         </script>
     </body>
 </html>
