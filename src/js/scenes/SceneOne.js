@@ -30,31 +30,38 @@ class SceneOne extends Scene {
         // Create character
         this.character = new Dancer01();
         this.character02 = new Dancer02();
-        var difficulty;
 
-        var queryStr = document.location.search;
-        var searchParams = new URLSearchParams(queryStr);
-        if (searchParams.has("difficulty")) {
-            switch (searchParams.get("difficulty")) {
-                case "easy":
-                difficulty = difficulties.easy;
+        // Difficulty
+        let difficulty = difficulties.easy;
+        const queryStr = document.location.search;
+        const searchParams = new URLSearchParams(queryStr);
+
+        if (searchParams.has('difficulty')) {
+            switch (searchParams.get('difficulty')) {
+                case 'easy': {
+                    difficulty = difficulties.easy;
                     break;
-                case "medium":
-                difficulty = difficulties.medium;
+                }
+                case 'medium': {
+                    difficulty = difficulties.medium;
                     break;
-                case "hard":
-                difficulty = difficulties.hard;
+                }
+                case 'hard': {
+                    difficulty = difficulties.hard;
                     break;
-                case "expert":
-                difficulty = difficulties.expert;
+                }
+                case 'expert': {
+                    difficulty = difficulties.expert;
                     break;
+                }
+                default: {
+                    difficulty = difficulties.easy;
+                }
             }
-        } else {
-            difficulty = difficulties.easy;
         }
 
         // Create Step Sequencer
-        this.stepSequencer = new StepSequencer(difficulties.easy);
+        this.stepSequencer = new StepSequencer(difficulty);
 
         Game.setSceneOne(this);
 
