@@ -3,20 +3,44 @@
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>HTML5 Template</title>
+        <title>Fan Favourite</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <!-- Stylesheets -->
-        <link rel="stylesheet" href="{{envPath}}/css/main.css?{{cacheBuster}}">
+        <link rel="stylesheet" href="{{envPath}}/css/main.css">
         <!-- /Stylesheets -->
     </head>
-    <body class="page-homepage">
-        <div id="font-loader"><p class="pixelmix">pixelmix</p></div>
-        <canvas id="app" tabindex="1"></canvas>
+    <body class="page-menu">
+        <div id="menu">
+            <img src="{{envPath}}/img/background-menu.png" usemap="#image-map">
+            <map name="image-map">
+                <area href="{{envPath}}/game.html?difficulty=easy" coords="148,138,149,169,233,170,234,134" shape="poly">
+                <area href="{{envPath}}/game.html?difficulty=hard" coords="134,173,253,173,255,205,135,195" shape="poly">
+                <area href="{{envPath}}/game.html?difficulty=hard" coords="151,198,150,222,239,225,250,204" shape="poly">
+                <area href="{{envPath}}/game.html?difficulty=expert" coords="125,224,249,226,247,255,128,255" shape="poly">
+            </map>
+        </div>
 
-        <!-- Scripts -->
-        <script src="{{envPath}}/js/main.js?{{cacheBuster}}"></script>
-        <!-- /Scripts -->
+        <script>
+            const areas = document.querySelectorAll('map area');
+            const menuImage = document.querySelector('img');
+
+            areas[0].addEventListener('mouseover', () => {
+                menuImage.src = '{{envPath}}/img/background-menu-easy.png';
+            });
+
+            areas[1].addEventListener('mouseover', () => {
+                menuImage.src = '{{envPath}}/img/background-menu-medium.png';
+            });
+
+            areas[2].addEventListener('mouseover', () => {
+                menuImage.src = '{{envPath}}/img/background-menu-hard.png';
+            });
+
+            areas[3].addEventListener('mouseover', () => {
+                menuImage.src = '{{envPath}}/img/background-menu-expert.png';
+            });
+        </script>
     </body>
 </html>
