@@ -136,6 +136,11 @@ experience.context.font = '15px pixelmix';
  * Bind event listeners
  */
 
+// Resize Listener
+window.addEventListener('resize', () => {
+    experience.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+
 // Add keydown listener
 experience.canvas.addEventListener('keydown', (e) => {
     e.preventDefault();
