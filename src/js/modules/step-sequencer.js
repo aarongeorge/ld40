@@ -75,7 +75,7 @@ const StepSequencer = class {
                 // Check the appropriate key is down
                 if (keyManager.isDown(step.key)) {
 
-                    if (Game.DancerManager.attackingW || Game.DancerManager.attackingA || Game.DancerManager.attackingS || Game.DancerManager.attackingD) {
+                    if ((Game.dancerManager.attackingW && step.key === 38) || (Game.dancerManager.attackingA && step.key === 37) || (Game.dancerManager.attackingS && step.key === 40) || (Game.dancerManager.attackingD && step.key === 39)) {
                         return;
                     }
 
@@ -155,20 +155,20 @@ const StepSequencer = class {
 
         experience.context.fillStyle = '#FF0000';
 
-        if (Game.DancerManager.attackingW) {
-            experience.fillRect(0, 0, 10, experience.size.width);
+        if (Game.dancerManager.attackingA) {
+            experience.context.fillRect(0, 0, experience.size.width, 10);
         }
 
-        if (Game.DancerManager.attackingA) {
-            experience.fillRect(0, 0, 30, experience.size.width);
+        if (Game.dancerManager.attackingW) {
+            experience.context.fillRect(0, 10, experience.size.width, 10);
         }
 
-        if (Game.DancerManager.attackingS) {
-            experience.fillRect(0, 0, 20, experience.size.width);
+        if (Game.dancerManager.attackingD) {
+            experience.context.fillRect(0, 20, experience.size.width, 10);
         }
 
-        if (Game.DancerManager.attackingD) {
-            experience.fillRect(0, 0, 0, experience.size.width);
+        if (Game.dancerManager.attackingS) {
+            experience.context.fillRect(0, 30, experience.size.width, 10);
         }
     }
 };
