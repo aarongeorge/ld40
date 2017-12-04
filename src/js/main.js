@@ -44,6 +44,26 @@ assetLoader.addAssets([
         'type': 'image'
     },
     {
+        'name': 'wSpriteSheet',
+        'path': '{{envPath}}/img/spritesheet-w.png',
+        'type': 'image'
+    },
+    {
+        'name': 'aSpriteSheet',
+        'path': '{{envPath}}/img/spritesheet-a.png',
+        'type': 'image'
+    },
+    {
+        'name': 'sSpriteSheet',
+        'path': '{{envPath}}/img/spritesheet-s.png',
+        'type': 'image'
+    },
+    {
+        'name': 'dSpriteSheet',
+        'path': '{{envPath}}/img/spritesheet-d.png',
+        'type': 'image'
+    },
+    {
         'type': 'audio',
         'name': 'sandstorm',
         'sources': [

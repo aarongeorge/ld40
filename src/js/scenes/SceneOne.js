@@ -10,6 +10,10 @@ import Dancer02 from '../characters/dancer-02';
 import StepSequencer from '../modules/step-sequencer';
 import * as Game from '../dirk/Game';
 import {medium} from '../modules/darude-notes';
+import W from '../keys/w';
+import A from '../keys/a';
+import S from '../keys/s';
+import D from '../keys/d';
 
 // Class: SceneOne
 class SceneOne extends Scene {
@@ -30,7 +34,12 @@ class SceneOne extends Scene {
         // Create Step Sequencer
         this.stepSequencer = new StepSequencer(medium);
 
-        window.stepSequencer = this.stepSequencer;
+        this.keys = {
+            'w': new W(),
+            'a': new A(),
+            's': new S(),
+            'd': new D()
+        };
     }
 
     // Method: render
@@ -54,6 +63,11 @@ class SceneOne extends Scene {
         }).length, 60, 48);
 
         Game.dancerManager.render();
+
+        this.keys.w.render();
+        this.keys.a.render();
+        this.keys.s.render();
+        this.keys.d.render();
     }
 
     // Method: update
@@ -62,6 +76,11 @@ class SceneOne extends Scene {
         this.character02.update(deltaTime / 1000);
         this.stepSequencer.update();
         Game.update(deltaTime / 1000);
+
+        this.keys.w.update(deltaTime);
+        this.keys.a.update(deltaTime);
+        this.keys.s.update(deltaTime);
+        this.keys.d.update(deltaTime);
     }
 
     // Method: enter
