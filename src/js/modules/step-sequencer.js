@@ -10,6 +10,7 @@
 // Dependencies
 import experience, {assetLoader, keyManager} from '../experience';
 import cloneDeep from 'lodash.clonedeep';
+import * as Game from '../dirk/Game';
 
 const StepSequencer = class {
     constructor (userSteps) {
@@ -73,6 +74,10 @@ const StepSequencer = class {
 
                 // Check the appropriate key is down
                 if (keyManager.isDown(step.key)) {
+
+                    if (Game.DancerManager.attackingW || Game.DancerManager.attackingA || Game.DancerManager.attackingS || Game.DancerManager.attackingD) {
+                        return;
+                    }
 
                     if (keyManager.keysDown[step.key] - this.startTime >= step.start - this.threshold) {
                         step.missed = false;
@@ -146,6 +151,24 @@ const StepSequencer = class {
 
             // Draw hit marker
             experience.context.drawImage(assetLoader.assets.hitMarker.element, this.renderingOffset.x, this.renderingOffset.y);
+        }
+
+        experience.context.fillStyle = '#FF0000';
+
+        if (Game.DancerManager.attackingW) {
+            experience.fillRect(0, 0, 10, experience.size.width);
+        }
+
+        if (Game.DancerManager.attackingA) {
+            experience.fillRect(0, 0, 30, experience.size.width);
+        }
+
+        if (Game.DancerManager.attackingS) {
+            experience.fillRect(0, 0, 20, experience.size.width);
+        }
+
+        if (Game.DancerManager.attackingD) {
+            experience.fillRect(0, 0, 0, experience.size.width);
         }
     }
 };
