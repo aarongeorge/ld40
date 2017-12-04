@@ -35,10 +35,6 @@ function preload(): Promise<void> {
 
 function initBandManager(): Promise<void> {
     bandManager = new BandManager();
-    console.log(bandMap.bassPoint);
-    console.log(bandMap.drummerPoint);
-    console.log(bandMap.guitarmanPoint);
-    console.log(bandMap.singerPoint);
     return Promise.resolve();
 }
 
@@ -75,8 +71,8 @@ export function update(delta: number) {
 }
 
 export function render() {
-    dancerManager.render();
     bandManager.render();
+    dancerManager.render();
 }
 
 export function start() {

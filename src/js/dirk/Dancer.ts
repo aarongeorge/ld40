@@ -53,7 +53,6 @@ export default class Dancer {
     chooseNewMovementVector() {
         // Using the heatmap pick a new target pixel
         var newTarget = this.heatmap.selectAtRandom();
-        console.log("New Target", newTarget);
         var distance = {
             x: newTarget.x - this.position.x ,
             y: newTarget.y - this.position.y
@@ -75,7 +74,6 @@ export default class Dancer {
             x: direction.x * this.pixelsPerSecond * (directionUnit/dampenedDistanceUnit),
             y: direction.y * this.pixelsPerSecond * (directionUnit/dampenedDistanceUnit) 
         };
-        console.log("MOVEMENT VECTOR", this.movementVector);
     }
 
     private move(delta: number) {
