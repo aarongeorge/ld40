@@ -17,7 +17,7 @@ export default class extends BaseKey {
         this.animationManager.add(this.animation);
         this.animation.start();
         this.visible = true;
-        this.x = 102;
-        this.y = 100;
+        this.x = 183;
+        this.y = 65;
     }
 }
